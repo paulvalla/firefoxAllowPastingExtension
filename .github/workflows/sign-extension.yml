@@ -23,7 +23,6 @@ jobs:
           node-version: '24'
 
       - name: Download & Cryptographically Verify web-ext
-        if: startsWith(github.ref, 'refs/tags/v')
         run: |
           # Download target web-ext version tarball from npm registry
           curl -sSL -o web-ext.tgz https://registry.npmjs.org/web-ext/-/web-ext-10.1.0.tgz
