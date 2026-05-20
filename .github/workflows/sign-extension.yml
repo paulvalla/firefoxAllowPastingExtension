@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Lint JavaScript
+        run: |
+          npx jshint background.js content.js
+
       - name: Download & Cryptographically Verify web-ext
         run: |
           # Download target web-ext version tarball from npm registry
