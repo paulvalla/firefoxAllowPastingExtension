@@ -1,0 +1,37 @@
+name: Sign Firefox Extension
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install web-ext
+        run: npm install -g web-ext
+
+      - name: Sign Extension
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+        run: |
+          # Sign the extension as an unlisted add-on
+          web-ext sign --source-dir=. --channel=unlisted
+
+      - name: Upload Signed Extension Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-firefox-extension
+          path: web-ext-artifacts/*.xpi
