@@ -9,6 +9,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   sign:
@@ -74,6 +76,12 @@ jobs:
 
           # Copy to a clean standard name for release asset upload
           cp web-ext-artifacts/*.xpi ./force-paste.xpi
+
+      - name: Generate Artifact Attestation
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/attest@v1
+        with:
+          subject-path: 'force-paste.xpi'
 
       - name: Create GitHub Release and Upload Asset
         if: startsWith(github.ref, 'refs/tags/v')
