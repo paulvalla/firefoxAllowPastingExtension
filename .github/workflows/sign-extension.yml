@@ -79,7 +79,7 @@ jobs:
 
       - name: Generate Artifact Attestation
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/attest@v1
+        uses: actions/attest-build-provenance@v1
         with:
           subject-path: 'force-paste.xpi'
 
