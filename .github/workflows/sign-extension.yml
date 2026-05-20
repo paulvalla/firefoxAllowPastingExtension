@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
 
@@ -40,6 +40,8 @@ jobs:
             process.exit(1);
           }
           console.log("✅ Cryptographic integrity verified successfully!");
+          console.log("Expected SHA512:", expected);
+          console.log("Computed SHA512:", hash);
           '
 
           # Install from verified tarball
@@ -81,7 +83,7 @@ jobs:
 
       - name: Upload Signed Extension Artifact
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: signed-firefox-extension
           path: force-paste.xpi
