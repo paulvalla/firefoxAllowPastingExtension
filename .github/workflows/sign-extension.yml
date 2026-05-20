@@ -77,13 +77,6 @@ jobs:
           # Copy to a clean standard name for release asset upload
           cp web-ext-artifacts/*.xpi ./force-paste.xpi
 
-      - name: Generate Artifact Attestation
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/attest@v1
-        with:
-          subject-path: 'force-paste.xpi'
-          predicate-type: 'https://slsa.dev/provenance/v1'
-
       - name: Create GitHub Release and Upload Asset
         if: startsWith(github.ref, 'refs/tags/v')
         env:
