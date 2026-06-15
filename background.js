@@ -36,10 +36,5 @@ browser.action.onClicked.addListener(async (tab) => {
     browser.action.setBadgeBackgroundColor({ color: "#777777", tabId: tab.id });
     browser.action.setTitle({ title: "Force Paste: OFF", tabId: tab.id });
     browser.action.setIcon({ path: "icon-off.svg", tabId: tab.id });
-
-    browser.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: () => { alert("Force Paste turned OFF. Reload the page to revert changes."); }
-    });
   }
 });
