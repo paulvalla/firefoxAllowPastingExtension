@@ -6,7 +6,7 @@ browser.runtime.onInstalled.addListener(() => {
 });
 
 // Allowed hostnames and their subdomains
-const allowedHostnames = ["dcb.bank.in", "hdfc.bank.in"];
+const allowedHostnames = ["dcb.bank.in", "hdfc.bank.in", "sbi.bank.in"];
 
 function isAllowedUrl(urlString) {
   if (!urlString) {
@@ -14,7 +14,7 @@ function isAllowedUrl(urlString) {
   }
   try {
     const url = new URL(urlString);
-    return allowedHostnames.some(hostname => 
+    return allowedHostnames.some(hostname =>
       url.hostname === hostname || url.hostname.endsWith("." + hostname)
     );
   } catch (e) {
